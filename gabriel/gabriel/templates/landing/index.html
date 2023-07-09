@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+<div
+  class="d-flex align-items-center justify-content-center"
+  style="height: 75vh"
+>
+  <div class="row">
+    <div class="card col-sm-12 col-12">
+      <div class="card-body">
+        <h5 class="card-title">Subir PDF</h5>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %} {{ upload_pdf_form.as_p }}
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Subir</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,35 @@
+networks:
+  web:
+    external: true
+
+services:
+  django:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: gabriel
+    networks:
+      - web
+    volumes:
+      - ./:/gabriel
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.gabriel.rule=Host(`pdf.luisesp.cloud`)
+      - traefik.http.routers.gabriel.service=gabriel
+      - traefik.http.services.gabriel.loadbalancer.server.port=8000
+  django-gb-db:
+    container_name: gabriel-db
+    image: postgres:15.3
+    environment:
+      - POSTGRES_DB=gb-db
+      - POSTGRES_USER=krasorx
+      - POSTGRES_PASSWORD=asdjkl123
+      - PGDATA=/var/lib/postgresqlgabriel/data/pgdata
+      - TZ=America/Argentina/Buenos_Aires
+    volumes:
+      - gb-db-data:/var/lib/postgresqlgabriel/data/pgdata
+    networks:
+      - web
+
+volumes:
+  gb-db-data:
