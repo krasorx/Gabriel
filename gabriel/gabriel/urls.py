@@ -18,9 +18,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 #from django.contrib.auth.decorators import login_required
-from . import views
 
 urlpatterns = [
-    path('', views.landing, name="landing"),
+    path('', include("gabriel.pdfChecker.urls"), name="landing"),
     path('admin/', admin.site.urls),
 ]

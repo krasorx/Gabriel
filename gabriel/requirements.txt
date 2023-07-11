@@ -2,3 +2,7 @@ asgiref==3.6
 psycopg2
 Django==4.2.2
 sqlparse==0.4.4
+PyPDF2
+pandas
+xlwings
+xhtml2pdf

@@ -26,6 +26,10 @@ services:
       - POSTGRES_PASSWORD=asdjkl123
       - PGDATA=/var/lib/postgresqlgabriel/data/pgdata
       - TZ=America/Argentina/Buenos_Aires
+    labels:
+      - "traefik.tcp.routers.postgres.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.postgres.entrypoints=postgres"
+      - "traefik.tcp.services.postgres.loadbalancer.server.port=5432"
     volumes:
       - gb-db-data:/var/lib/postgresqlgabriel/data/pgdata
     networks:
