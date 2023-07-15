@@ -6,3 +6,4 @@ PyPDF2
 pandas
 xlwings
 xhtml2pdf
+PyPDF4

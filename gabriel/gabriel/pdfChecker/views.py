@@ -26,15 +26,24 @@ class UploadPdfView(View):
         )
 
     def post(self, request):
-        logging.debug("UploadPdfView -- POST")
+        print("UploadPdfView -- POST")
         upload_pdf_form = PdfForm(
             data=request.POST or None, files=request.FILES or None
         )
         if upload_pdf_form.is_valid():
-            pdf = upload_pdf_form.save()
-            services.checkPdf(pdf)
-            messages.success(request, "This is only a test")
-            return HttpResponseRedirect("/")
-
-        messages.error(request, "Error el pdf")
+            print(f'Datos limpios pdf {upload_pdf_form.cleaned_data}')
+            pdf_instance = upload_pdf_form.save()
+            print(f'a ver que wea tiene esto: {pdf_instance}')
+            pdf_state = services.checkPdf(pdf_instance)
+            messages.success(request, "PDF subido con éxito.")
+            return render(
+                request,
+                template_name="pdfChecker/index.html",
+                context={
+                    "upload_pdf_form": PdfForm(),
+                    "pdf_state": pdf_state,
+                },
+            )
+        else:
+            messages.error(request, "Error al cargar el PDF.")
         return HttpResponseRedirect("/")

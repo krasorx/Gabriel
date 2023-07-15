@@ -4,13 +4,11 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 
 class Pdf(models.Model):
-    Pdf = models.FileField(
-        verbose_name="Pdf",
-        validators=[FileExtensionValidator(allowed_extensions=["pdf"])],
-    )
+    title = models.CharField(max_length=50,default='titulo')
+    file = models.FileField(upload_to='pdfs/',default='')
 
     def __str__(self):
-        return self.Pdf.name
+        return self.title
 
     class Meta:
         verbose_name = "Pdf"

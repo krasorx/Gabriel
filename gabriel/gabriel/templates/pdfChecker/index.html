@@ -18,4 +18,29 @@
   </div>
 </div>
 
+ {% if pdf_state %}
+ <div class="row mt-5">
+   <div class="col">
+     <h3>PDF State:</h3>
+     <table class="table">
+       <thead>
+         <tr>
+           <th scope="col">Nombre PDF</th>
+           <th scope="col">Esta firmado digitalmente?</th>
+           <th scope="col">esta desbloqueado?</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td>{{ pdf_state.name }}</td>
+           <td>{{ pdf_state.is_signed }}</td>
+           <td>{{ pdf_state.is_unlocked }}</td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+ </div>
+ {% endif %}
+</div>
+
 {% endblock content %}
